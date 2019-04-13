@@ -1,0 +1,29 @@
+cout<<"\n(T1 "<<t1index;
+						    cout<<",T2 "<<t2index<<")";
+						    cout<<"(u,v"<<u<<" "<<v<<")\n";
+						    
+						    
+						    void trace(vector< vector <SteinerMin> > ST,long index,long v, graph *g, vector<long> terminals){
+        long u;
+        if(!(index&(index-1))){
+                u=ST[index][v].minu;
+                g->printPath(u,v);
+                return;
+        }
+        g->printPath(v,ST[index][v].minu);
+        trace(ST,ST[index][v].min_ind1,ST[index][v].minu,g,terminals);
+        trace(ST,ST[index][v].min_ind2,ST[index][v].minu,g,terminals);
+}
+
+
+void trace(vector< vector <SteinerMin> > ST,long index,long v, graph *g, vector<long> terminals){
+        long u;
+        if(!(index&(index-1))){
+                u=ST[index][v].minu;
+                g->printPath(u,v);
+                return;
+        }
+        g->printPath(v,ST[index][v].minu);
+        trace(ST,ST[index][v].min_ind1,ST[index][v].minu,g,terminals);
+        trace(ST,ST[index][v].min_ind2,ST[index][v].minu,g,terminals);
+} trace(ST,index,v,g,terminals);
