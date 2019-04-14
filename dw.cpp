@@ -61,13 +61,13 @@ class graph{
                 next.push_back(ne);
                 path.push_back(p);
             }
-                 cout<<"\n---------------next matrix 0------------\n";
+         /*        cout<<"\n---------------next matrix 0------------\n";
             for(i = 0; i < n; i++)
             {
               for(j = 0; j < n;j++ )
                   cout<<next[i][j]<<" ";
             cout<<"\n";
-            }
+            }*/
             for (i = 0; i < n; i++)
                 for (j = 0; j < n; j++){
                     dist[i][j] = adj_matrix[i][j];
@@ -75,14 +75,14 @@ class graph{
                             next[i][j]=j;
                     }
                 }
-     cout<<"\n---------------next matrix 1------------\n";
+/*     cout<<"\n---------------next matrix 1------------\n";
             for(i = 0; i < n; i++)
             {
               for(j = 0; j < n;j++ )
                   cout<<next[i][j]<<" ";
             cout<<"\n";
             }
-       
+  */     
             for (k = 0; k < n; k++)
             {
                 for (i = 0; i < n; i++)
@@ -98,7 +98,7 @@ class graph{
                 }
             }
              //printing bellman distance matrix
-           cout<<"\n---------------Bellman ford matrix------------\n";
+     /*      cout<<"\n---------------Bellman ford matrix------------\n";
             for(i = 0; i < n; i++)
             {
               for(j = 0; j < n;j++ )
@@ -112,9 +112,9 @@ class graph{
                   cout<<next[i][j]<<" ";
             cout<<"\n";
             }
-            
+       */     
             //Shortest Path
-            for(i=0;i<n;i++)
+        /*    for(i=0;i<n;i++)
                 for(j=0;j<n;j++){
                     Find_path(i,j);
                 }
@@ -129,7 +129,7 @@ class graph{
                 u=next[u][v];
                 cout<<u<<"->";
                 path[i][j].push_back(u);
-            }
+            }*/
         }
 
         void printPath(long u,long v){
@@ -147,39 +147,31 @@ graph* graph_init()
     long u, v, w;
    
 	FILE *fp;
-	fp = fopen("t1.txt","r");
-   
+	fp = fopen("t2.txt","r");
     graph *g = new graph();
-    cout<<"Enter the number of Vertex\n";
-    //cin>>n;
+    //Enter the number of Vertex\n";
     fscanf(fp,"%ld",&n);
     g->n = n;
-    cout<<"Enter the number of Edges\n";
-  //  cin>>e;
+    //Enter the number of Edges\n";
     fscanf(fp,"%ld",&e);
     g->e = e;
-    cout<<"Enter the number of Terminals\n";
-    //cin>>t;
-    //t++;
-    fscanf(fp,"%ld",&t);
+    //Enter the number of Terminals\n";
+	fscanf(fp,"%ld",&t);
     g->t=t;
     cout<<"Enter Edges(u,v,wieght)\n";
     for(int i=0;i<e;i++)
     {
-    fscanf(fp,"%ld %ld %ld", &u, &v, &w);
+      fscanf(fp,"%ld %ld %ld", &u, &v, &w);
       g->graph_add_edge(u-1, v-1, w);
     }
     cout<<"Enter Terminals\n";
     for(int i=0;i<t;i++)
     {
-    fscanf(fp,"%ld", &u);
+      fscanf(fp,"%ld", &u);
       g->terminals.push_back(u-1);
     }
-   
-    cout<<"l";
     g->create_adjmatrix();
     g->All_Pairs_Shortest_Path();
-    
     return g;
 }
 struct SteinerMin{
@@ -205,26 +197,37 @@ void Subset_Creator(vector< vector <SteinerMin> > &ST, vector<long> terminals, l
         long index=0;
         cout<<"\n";
         for(long k=0;k<r;k++)
-        {   cout<<"{"<<t1[k]<<"}";
+        {   //cout<<"{"<<t1[k]<<"}";
             index+=(1<<t1[k]);
             
             //cout<<terminals[t1[k]]+1<<" ";
         }
-        cout<<"\n index<><>"<<index<<" ";
+        bitset<10> Ind(index);
+        cout<<"\n index<><> "<<Ind<<" \n";
       //  cout<<"--------------------index"<<index;
         //cout<<"="<<index<<"\n";
         long min1,min2,min_ind1,min_ind2,sum,u,v,k,i,t1index,t2index,total=(1<<r);
         set<pair<long,long> >::iterator it;
+          bitset<10> tot(total);
+                		cout<<"["<<tot<<"]";
+                		for(int i=0;i<total-1;i++)
+                		 { for(int j=0;j<r;j++)
+                		  {
+                		    int q=i&(1<<j);
+                		    bitset<10> tot1(q);
+                		    cout<<"\n[Q--"<<tot1<<"]";
+                		  }
+                		  }
         for(v=0;v<g->n;v++)
         {
         
         
-            cout<<v<<"---===";
+        //    cout<<v<<"---===";
             if(r==g->t)
                 v=tprime;//if r is size of tereminal, v
         
             ST[index][v].wt=LONG_MAX;
-            
+          
             	for(u=0;u<g->n;u++)
             	{
                 		min1=g->dist[v][u];
@@ -273,9 +276,9 @@ void Subset_Creator(vector< vector <SteinerMin> > &ST, vector<long> terminals, l
                 }
              }
             if(r==g->t){
-		     cout<<index<<v;
+		     //cout<<index<<v;
 		     fprintf(stdout,"VALUE %ld\n",ST[index][v].wt);
-                cout<<"\nMinimum Steiner Tree is:";
+               /* cout<<"\nMinimum Steiner Tree is:";
                 cout<<"\n--------------------------------------------------\n";
                 for(int q=1;q<(1<<g->t);q++)
                 { cout<<"\n";
@@ -293,7 +296,7 @@ void Subset_Creator(vector< vector <SteinerMin> > &ST, vector<long> terminals, l
                
                 steinerTree.n=g->n;
                 
-               
+               */
               
                // exit(0);
                 break;
@@ -339,7 +342,7 @@ void Dreyfus_Wagner(graph *g){
 
         } 
     }
-                    cout<<"\n--------------------------------------------------\n";
+                  /*  cout<<"\n--------------------------------------------------\n";
                 for(int q=0;q<(1<<(g->t));q++)
                 { cout<<"\n";
                  for(int v=0;v<g->n;v++)
@@ -349,7 +352,7 @@ void Dreyfus_Wagner(graph *g){
                  }
                 
                 }
-                cout<<"\n--------------------------------------------------\n";
+                cout<<"\n--------------------------------------------------\n";*/
     //
     for(long X_size=2;X_size<=g->t;X_size++){
         get_sublength_r(ST,g->terminals,X_size,g,tprime);
