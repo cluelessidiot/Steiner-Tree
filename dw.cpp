@@ -3,9 +3,6 @@
 #include<algorithm>
 #include<limits.h>
 #include<math.h>
-//char *inputfile=new char[17];
-//char *outputfile;
-FILE *file1;
 using namespace std;
 class tree{
     public:
