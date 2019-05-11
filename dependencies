@@ -1,0 +1,9 @@
+#!/bin/bash
+cd $HOME/Steiner-Tree
+sudo apt-get update
+sudo apt-get install g++
+sudo apt-get update
+sudo apt-get install python3
+sudo apt-get update
+sudo pip3 install matplotlib
+sudo pip3 install networkx
